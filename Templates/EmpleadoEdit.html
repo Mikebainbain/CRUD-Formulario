@@ -10,12 +10,12 @@
         </div>
     {% endif %}
         <h1> Actualizacion de empleados </h1>
-        <form action="{% url 'guardarEmpleado' %}" method="post">
+        <form action="#" method="post">
 
             {% csrf_token %} <!-- token de seguridad para identificarse en el lado del sevidor -->
             {% if mensaje %}
             <div class="alert alert-success" role="alert">
-               Empleado registrado¡¡¡
+               Empleado actualizado¡¡¡
               </div>
             {% endif %}
 

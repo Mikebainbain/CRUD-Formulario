@@ -16,12 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from views.homeView import HomeView
+from Models.CRUD.views import FormularioEmpleadoView
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
     path('',HomeView.home, name = 'home'),
     path('usuario/',HomeView.usuario, name ='usuario' ),
     path('formulario/',HomeView.formulario, name = 'form'),
-
+    path('registrarEmpleado/', FormularioEmpleadoView.index, name = 'registrarEmpleado'),
+    path('guardarEmpleado/', FormularioEmpleadoView.procesar_formulario,name = 'guardarEmpleado'),
+    path('listarEmpleados/', FormularioEmpleadoView.listar_empleados,name = 'listarEmpleados'),
+    path('editarEmpleado/<int:idempleado>',  FormularioEmpleadoView.edit, name='editarEmpleados'),
 
 ]
