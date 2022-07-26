@@ -10,7 +10,7 @@
         </div>
     {% endif %}
         <h1> Actualizacion de empleados </h1>
-        <form action="#" method="post">
+        <form action="{% url 'actualizarEmpleados' empleado.idempleado %}" method="post">
 
             {% csrf_token %} <!-- token de seguridad para identificarse en el lado del sevidor -->
             {% if mensaje %}

@@ -7,7 +7,6 @@ from Models.CRUD.models import Empleado
 from Models.CRUD.forms import formularioEmpleado
 
 # Create your views here.
-<<<<<<< HEAD
 class FormularioEmpleadoView(): #Metodos para registar empleados
     def index(request):                 
         empleado = formularioEmpleado()
@@ -25,10 +24,24 @@ class FormularioEmpleadoView(): #Metodos para registar empleados
         return render(request, "ListaEmpleados.html",{"empleados":empleados})
     
     def edit(request, idempleado):
-        empleado = Empleado.objects.filter(id=idempleado).first()
+        empleado = Empleado.objects.filter(idempleado=idempleado).first()
         form = formularioEmpleado(instance=empleado)
         return render(request, "EmpleadoEdit.html", {"formulario":form, 'empleado':empleado})
+    
+    def actualizar_empleado(request, idempleado):
+        empleado = Empleado.objects.get(pk = idempleado)
+        forms = formularioEmpleado(request.POST, instance=empleado)
+        if forms.is_valid():
+            forms.save()
+        empleados = Empleado.objects.all()
+        return render(request, "ListaEmpleados.html",{"empleados":empleados})
 
+    def borrar(request, idempleado):
+        empleado = Empleado.objects.get (pk = idempleado)
+        empleado.delete()
+        empleados = Empleado.objects.all()
+        return render(request, "ListaEmpleados.html",{"empleados":empleados, "mensaje": 'OK'})       
+ 
 
 
     

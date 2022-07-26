@@ -10,6 +10,11 @@
   <a class="btn btn-dark col-md-3" href="{% url 'registrarEmpleado' %}">Agregar</a>
 </div>
 </br>
+{% if mensaje %}
+<div class="alert alert-success" role="alert">
+   Empleado eliminado 
+  </div>
+{% endif %}
 <table class="table table-striped">
     <thead>
       <tr>
@@ -31,8 +36,8 @@
         <td>{{empleado.apellido}}</td>
         <td>{{empleado.puesto}}</td>
         <td>{{empleado.area}}</td>
-        <td><a class="btn btn-warning col-md-5" href="{% url 'editarEmpleados' idempleado %}">Editar</a></td>
-        <td><a class="btn btn-danger col-md-5">Eliminar</a></td>
+        <td><a class="btn btn-warning col-md-5" href="{% url 'editarEmpleados' empleado.idempleado %}">Editar</a></td>
+        <td><a class="btn btn-danger col-md-5" href="{% url 'eliminarEmpleados' empleado.idempleado %}">Eliminar</a></td>
       </tr>
 
       {% endfor %}

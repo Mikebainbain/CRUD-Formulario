@@ -27,5 +27,6 @@ urlpatterns = [
     path('guardarEmpleado/', FormularioEmpleadoView.procesar_formulario,name = 'guardarEmpleado'),
     path('listarEmpleados/', FormularioEmpleadoView.listar_empleados,name = 'listarEmpleados'),
     path('editarEmpleado/<int:idempleado>',  FormularioEmpleadoView.edit, name='editarEmpleados'),
-
+    path('actualizarEmpleado/<int:idempleado>',  FormularioEmpleadoView.actualizar_empleado, name='actualizarEmpleados'),
+    path('eliminarEmpleados/<int:idempleado>',  FormularioEmpleadoView.borrar, name='eliminarEmpleados'),
 ]
