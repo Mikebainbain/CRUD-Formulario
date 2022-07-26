@@ -1,9 +1,13 @@
+from django.http import HttpRequest
 from django.shortcuts import render
 from django.http import HttpRequest
 from Models.CRUD.forms import formularioEmpleado
 from Models.CRUD.models import Empleado
 
+from Models.CRUD.forms import formularioEmpleado
+
 # Create your views here.
+<<<<<<< HEAD
 class FormularioEmpleadoView(): #Metodos para registar empleados
     def index(request):                 
         empleado = formularioEmpleado()
