@@ -1,25 +1,23 @@
 from django.http import HttpRequest
 from django.shortcuts import render
-from django.http import HttpRequest
 from Models.CRUD.forms import formularioEmpleado
 from Models.CRUD.models import Empleado
-
 from Models.CRUD.forms import formularioEmpleado
 
 # Create your views here.
-class FormularioEmpleadoView(): #Metodos para registar empleados
+class FormularioEmpleadoView(): # Metodos para registar empleados()
     def index(request):                 
         empleado = formularioEmpleado()
         return render(request,"Empleadoindex.html",{"formulario":empleado} )
     
-    def procesar_formulario(request):
+    def procesar_formulario(request):# Metodo que valida si los datos introducidos en el formulario son validos y los guarda
         empleado = formularioEmpleado(request.POST)
         if empleado.is_valid():
             empleado.save()
             empleado = formularioEmpleado()
         return render(request, "Empleadoindex.html", {"formulario": empleado, "mensaje": 'OK'})
 
-    def listar_empleados(request):# Metodo que muestra toda la tabla listad e empleados
+    def listar_empleados(request):# Metodo que muestra toda la tabla lista de empleados
         empleados = Empleado.objects.all()
         return render(request, "ListaEmpleados.html",{"empleados":empleados})
     
