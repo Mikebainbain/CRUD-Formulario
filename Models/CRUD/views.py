@@ -1,9 +1,11 @@
 from django.http import HttpRequest
-from django.shortcuts import render
-from Models.CRUD.forms import formularioEmpleado
+from django.shortcuts import render, redirect
+from Models.CRUD.forms import formularioEmpleado , UserRegisterForm
 from Models.CRUD.models import Empleado
 from Models.CRUD.forms import formularioEmpleado
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm #es un form de django que se utiliza para la autenticacion 
+from django.contrib import messages # sirve para mostrar el mensaje al omento de registrar un usuario de login
+
 
 # Create your views here.
 class FormularioEmpleadoView(): # Metodos para registar empleados()
@@ -50,12 +52,14 @@ class FormularioEmpleadoView(): # Metodos para registar empleados()
 
     def register(request):
         if request.method == 'POST':
-            form =  UserCreationForm(request.POST)
-            if forms.is_valid():
+            form =  UserRegisterForm(request.POST)
+            if form.is_valid():
+                form.save()
                 username=form.cleaned_data['username']
-                messages.success(request, f'Usuario {username} creado')
+                messages.success(request, f'Usuario {username} registrado exitosamente')
+                return redirect('home')
         else:
-            form = UserCreationForm()
+            form = UserRegisterForm()
         return render(request, 'registro.html',{'form':form})
 
  

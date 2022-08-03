@@ -17,9 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from views.homeView import HomeView
 from Models.CRUD.views import FormularioEmpleadoView
+from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
-    #path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('',HomeView.home, name = 'home'),
     path('usuario/',HomeView.usuario, name ='usuario' ),
     path('formulario/',HomeView.formulario, name = 'form'),
@@ -31,4 +32,6 @@ urlpatterns = [
     path('eliminarEmpleados/<int:idempleado>',  FormularioEmpleadoView.borrar, name='eliminarEmpleados'),
     path('empleados/', FormularioEmpleadoView.empleado, name='empleado'),
     path('register/', FormularioEmpleadoView.register, name = 'register'),
+    path('login/',LoginView.as_view(template_name='login.html'), name = 'login'),
+    path('logout/',LogoutView.as_view(template_name='logout.html'), name = 'logout'),
 ]
