@@ -3,6 +3,7 @@ from django.shortcuts import render
 from Models.CRUD.forms import formularioEmpleado
 from Models.CRUD.models import Empleado
 from Models.CRUD.forms import formularioEmpleado
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 class FormularioEmpleadoView(): # Metodos para registar empleados()
@@ -19,7 +20,7 @@ class FormularioEmpleadoView(): # Metodos para registar empleados()
 
     def listar_empleados(request):# Metodo que muestra toda la tabla lista de empleados
         empleados = Empleado.objects.all()
-        return render(request, "ListaEmpleados.html",{"empleados":empleados})
+        return render(request, "ListaEmpleados.html",{"empleadox":empleados})
     
     def edit(request, idempleado):
         empleado = Empleado.objects.filter(idempleado=idempleado).first()
@@ -38,7 +39,25 @@ class FormularioEmpleadoView(): # Metodos para registar empleados()
         empleado = Empleado.objects.get (pk = idempleado)
         empleado.delete()
         empleados = Empleado.objects.all()
-        return render(request, "ListaEmpleados.html",{"empleados":empleados, "mensaje": 'OK'})       
+        return render(request, "ListaEmpleados.html",{"empleados":empleados, "mensaje": 'OK'})
+
+    def empleado(request):
+         return render(request, "Empleado.html")    
+
+
+
+# PARA HACER EL FORMULARIO DE REGISTRO
+
+    def register(request):
+        if request.method == 'POST':
+            form =  UserCreationForm(request.POST)
+            if forms.is_valid():
+                username=form.cleaned_data['username']
+                messages.success(request, f'Usuario {username} creado')
+        else:
+            form = UserCreationForm()
+        return render(request, 'registro.html',{'form':form})
+
  
 
 
